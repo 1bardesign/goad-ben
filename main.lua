@@ -1,16 +1,6 @@
 require("lib.batteries"):export()
 
-if table.contains({"Android", "iOS"}, love.system.getOS()) then
-	--(request portrait mode)
-	love.window.setMode(1, 2)
-else
-	--(just fullscreen)
-	love.window.setMode(0, 0, {
-		fullscreen = "desktop"
-	})
-end
-
-local sw, sh = love.graphics.getDimensions()
+sw, sh = love.graphics.getDimensions()
 local font_size = math.floor(math.min(sw, sh) / 10)
 love.graphics.setFont(love.graphics.newFont(font_size))
 love.keyboard.setKeyRepeat(true)
