@@ -1,6 +1,17 @@
 require("lib.batteries"):export()
 
-local font_size = 80
+if table.contains({"Android", "iOS"}, love.system.getOS()) then
+	--(request portrait mode)
+	love.window.setMode(1, 2)
+else
+	--(just fullscreen)
+	love.window.setMode(0, 0, {
+		fullscreen = "desktop"
+	})
+end
+
+local sw, sh = love.graphics.getDimensions()
+local font_size = math.floor(math.min(sw, sh) / 10)
 love.graphics.setFont(love.graphics.newFont(font_size))
 love.keyboard.setKeyRepeat(true)
 
@@ -59,10 +70,9 @@ function love.keypressed(k)
 end
 
 function love.draw()
-	local w, h = love.graphics.getDimensions()
 	love.graphics.translate(
-		w / 2,
-		h / 2
+		sw / 2,
+		sh / 2
 	)
 	local caret = (math.wrap(love.timer.getTime(), 0, caret_period) < caret_period * 0.5 and "" or "|")
 	--wiggle
@@ -73,7 +83,7 @@ function love.draw()
 	}) do
 		love.graphics.print(
 			v,
-			-w / 3,
+			-sw / 3,
 			(i - 2) * font_size * 1.5
 		)
 	end
