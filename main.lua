@@ -104,7 +104,7 @@ function love.draw()
 	--draw some shape thing
 	love.graphics.translate(0, sh / 4)
 	local ngons = {3, 4, 5}
-	local ngon_size = 30
+	local ngon_size = sw / 5 / 3
 	local ngon_scale = 3
 	love.graphics.push()
 	love.graphics.scale(ngon_scale)
